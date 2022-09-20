@@ -1,0 +1,22 @@
+on: 
+  pull_request:
+    paths:
+      - 'wp-content/themes/**/**.php'
+
+name: Inspections
+jobs:
+  runPHPCSInspection:
+    name: Run PHPCS inspection
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Run PHPCS inspection
+      uses: rtCamp/action-phpcs-code-review@v2
+      env:
+        GH_BOT_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+        SKIP_FOLDERS: "tests,.github,vendor,node_modules,wp-admin,wp-includes,wp-content/plugins,wp-content/mu-plugins,wp-content/cache,wp-content/languages,wp-content/uploads"
+        PHPCS_SNIFFS_EXCLUDE: "WordPress.Files.FileName"
+      with:
+        args: "WordPress,WordPress-Core,WordPress-Docs"

@@ -1,0 +1,9 @@
+wp-admin
+wp-includes
+wp-content/plugins
+wp-content/mu-plugins
+wp-content/cache
+wp-content/languages
+wp-content/uploads
+vendor
+node_modules

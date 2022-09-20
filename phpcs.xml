@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<ruleset name="PilotIn">
+
+    <description>Pilot'In Coding Standards</description>
+
+    <!-- Look only for those files extensions (php,js,css...) -->
+    <arg name="extensions" value="php"/>
+
+    <!-- To customize WordPress properties: -->
+    <!-- https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties#custom-word-delimiters-in-hook-names -->
+
+    <!-- WordPress ruleset -->
+    <rule ref="WordPress">
+
+        <!-- Disable Yoda conditions check as an example. -->
+        <exclude name="WordPress.PHP.YodaConditions"/>
+
+        <!-- Disable this rule so we can use "Generic.Formatting.SpaceAfterNot" rule -->
+        <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter"/>
+
+        <!-- Disable this rule so we can name our class files as we want -->
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+
+        <!-- Allow back space indent -->
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
+
+        <!-- Allow custom file name -->
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+
+    </rule>
+
+    <!-- WordPress Core ruleset -->
+    <rule ref="WordPress-Core">
+
+        <!-- Allow short ternaries -->
+        <exclude name="WordPress.PHP.DisallowShortTernary" />
+
+    </rule>
+
+    <!-- Allow Meta & Tax query -->
+    <rule ref="WordPress.DB.SlowDBQuery">
+        <properties>
+            <property name="exclude" type="array">
+                <element value="slow_db_query"/>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- Prevent space after not "!" -->
+    <rule ref="Generic.Formatting.SpaceAfterNot">
+        <properties>
+            <property name="spacing" value="0"/>
+        </properties>
+    </rule>
+
+    <!-- Force space indent configuration -->
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <properties>
+            <property name="indent" value="4"/>
+            <property name="tabIndent" value="false"/>
+        </properties>
+    </rule>
+
+    <!-- Disable Tab indent -->
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+
+    <!-- Add extra words delimiter for hook names -->
+    <rule ref="WordPress.NamingConventions.ValidHookName">
+        <properties>
+            <property name="additionalWordDelimiters" value="-/."/>
+        </properties>
+    </rule>
+
+    <!-- WordPress-Docs ruleset -->
+    <!-- https://github.com/WordPress/WordPress-Coding-Standards/blob/develop/WordPress-Docs/ruleset.xml -->
+    <rule ref="WordPress-Docs">
+
+        <!-- Allow "Commented out code" -->
+        <exclude name="Squiz.PHP.CommentedOutCode"/>
+
+        <!-- Allow "Missing comments" -->
+        <exclude name="Squiz.Commenting.InlineComment"/>
+        <exclude name="Squiz.Commenting.FileComment"/>
+        <exclude name="Squiz.Commenting.FunctionComment"/>
+
+        <!-- Allow "Space indent" -->
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
+
+        <!-- Allow custom file name -->
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+
+    </rule>
+
+    <!-- WordPress-Extra ruleset -->
+    <!-- https://github.com/WordPress/WordPress-Coding-Standards/blob/develop/WordPress-Extra/ruleset.xml -->
+    <rule ref="WordPress-Extra">
+
+        <!-- Prevent duplicate messages + deprecation notice from deprecated sniff. -->
+        <exclude name="WordPress.WP.TimezoneChange.timezone_change_date_default_timezone_set"/>
+        <exclude name="WordPress.WP.TimezoneChange.DeprecatedSniff"/>
+
+        <!-- Prevent messages about escaping every values -->
+        <exclude name="WordPress.Security.EscapeOutput"/>
+
+        <!-- Disable forcing of closing PHP tag on a new line -->
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeEnd"/>
+
+    </rule>
+
+    <!-- Remove rule concerning end of file -->
+    <rule ref="Generic.Files.LineEndings">
+        <exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
+    </rule>
+
+    <!-- Show sniff codes in all reports -->
+    <arg value="s"/>
+
+    <!-- Check up to 8 files simultaneously. -->
+    <arg name="parallel" value="8"/>
+
+    <!-- Excludes folders -->
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+</ruleset>
